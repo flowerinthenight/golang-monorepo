@@ -7,8 +7,6 @@ import (
 	"github.com/pkg/errors"
 )
 
-// Test-
-
 // Err2 returns an error with stacktrace when glog level is 2, otherwise,
 // return the same error with the optional wrap string, if provided.
 func Err2(err error, s ...string) error {
