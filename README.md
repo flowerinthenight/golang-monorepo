@@ -26,3 +26,13 @@ When the changes belong to either `pkg` or `vendor`, the script will then try to
 - `vendor/` - Third party codes from different vendors.
 
 Although we have this structure, there is no limitation into where should you put your services/cmds. Any subdirectory structure is fine as long as a Makefile is provided.
+
+## How to add a service/cmd
+
+A reference template named [samplesvc](./services/samplesvc) is provided. Basically, these are the things that you need to do:
+
+- Create a new directory for your service under `services/` or tool under `cmd/`. You may copy the `samplesvc` contents to your new directory.
+- Provide a dockerfile in the root directory. You may copy the reference file [dockerfile.samplesvc](./dockerfile.samplesvc)
+- If your dockerfile doesn't need items from root (i.e. you don't need to copy `pkg` and/or `vendor`), you can put it in your service's directory. Just remember that your Makefile will be called from root directory during CI builds.
+- Update the [Makefile](./services/samplesvc/Makefile) with your own values. You need to at least update the `MODULE` variable with your service name. The only required rule is the `custom` part so you may need to change that as well (i.e. name of the dockerfile used in `docker build`).
+- [Optional] Update the [deploy.sh](./services/samplesvc/deploy.sh) script for your deployment needs.
