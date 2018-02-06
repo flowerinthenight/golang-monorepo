@@ -19,16 +19,16 @@ jobs:
           mv /tmp/docker/* /usr/bin
           docker --version
 
-          # Install awscli. Used for pushing container images to ECR.
-          # You may want to set these environment variables:
-          # 
-          #     AWS_ACCESS_KEY_ID
-          #     AWS_SECRET_ACCESS_KEY
-          #
-          apt update && apt install -y python-pip python-dev
-          pip install --user awscli
-          export PATH=${PATH}:${HOME}/.local/bin
-          aws --version
+          ### Install awscli. Used for pushing container images to ECR.
+          ### You may want to set these environment variables:
+          ### 
+          ###     AWS_ACCESS_KEY_ID
+          ###     AWS_SECRET_ACCESS_KEY
+          ###
+          # apt update && apt install -y python-pip python-dev
+          # pip install --user awscli
+          # export PATH=${PATH}:${HOME}/.local/bin
+          # aws --version
 
           # Extract commit range (or single commit).
           echo "Compare url '${CIRCLE_COMPARE_URL}'"
