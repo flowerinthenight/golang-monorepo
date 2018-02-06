@@ -9,3 +9,5 @@ This is an example of a golang-based monorepo. It has the following features:
 - Build all services that are affected by changes in `vendor` codes.
 
 It uses [dep](https://github.com/golang/dep) as its dependency management tool.
+
+For now, only [CircleCI](./.circleci/config.yml) is supported.
