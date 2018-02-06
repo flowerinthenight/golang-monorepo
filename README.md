@@ -20,11 +20,9 @@ When the changes belong to either `pkg` or `vendor`, the script will then try to
 
 ## Directory structure
 
-Our directory structure consists of the following:
-
-- `services/` - Basically, long running services deployed to [mochi](https://github.com/mobingilabs/mochi).
+- `services/` - Basically, long running services.
 - `cmd/` - CLI-based tools that are not long running.
 - `pkg/` - Shared codes, or libraries common across the repo.
 - `vendor/` - Third party codes from different vendors.
 
-Although we have this structure, there is no limitation into where should we put our services/tools. Any subdirectory structure is fine as long as you have a makefile that can be called from the root makefile.
+Although we have this structure, there is no limitation into where should you put your services/cmds. Any subdirectory structure is fine as long as a Makefile is provided.
