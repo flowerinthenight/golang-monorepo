@@ -1,2 +1,1 @@
-# golang-monorepo
-An example of a golang-based monorepo.
+[![CircleCI](https://circleci.com/gh/flowerinthenight/golang-monorepo.svg?style=svg)](https://circleci.com/gh/flowerinthenight/golang-monorepo)
