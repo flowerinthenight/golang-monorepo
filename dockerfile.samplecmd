@@ -1,15 +1,15 @@
 FROM golang:1.9.3
 ARG version
-COPY pkg/ /go/src/github.com/flowerinthenigh/golang-monorepo/pkg/
-COPY vendor/ /go/src/github.com/flowerinthenigh/golang-monorepo/vendor/
-COPY cmd/samplecmd/ /go/src/github.com/flowerinthenigh/golang-monorepo/cmd/samplecmd/
-COPY kubeconf-dev.yaml /go/src/github.com/flowerinthenigh/golang-monorepo/cmd/samplecmd/
-WORKDIR /go/src/github.com/flowerinthenigh/golang-monorepo/cmd/samplecmd/
-RUN CGO_ENABLED=0 GOOS=linux go build -v -ldflags "-X github.com/flowerinthenigh/golang-monorepo/cmd/samplecmd/main.version=$version" -a -installsuffix cgo -o samplecmd .
+COPY pkg/ /go/src/github.com/flowerinthenight/golang-monorepo/pkg/
+COPY vendor/ /go/src/github.com/flowerinthenight/golang-monorepo/vendor/
+COPY cmd/samplecmd/ /go/src/github.com/flowerinthenight/golang-monorepo/cmd/samplecmd/
+COPY kubeconf-dev.yaml /go/src/github.com/flowerinthenight/golang-monorepo/cmd/samplecmd/
+WORKDIR /go/src/github.com/flowerinthenight/golang-monorepo/cmd/samplecmd/
+RUN CGO_ENABLED=0 GOOS=linux go build -v -ldflags "-X github.com/flowerinthenight/golang-monorepo/cmd/samplecmd/main.version=$version" -a -installsuffix cgo -o samplecmd .
 
 FROM alpine:3.7
 RUN apk --no-cache add ca-certificates
 WORKDIR /samplecmd/
-COPY --from=0 /go/src/github.com/flowerinthenigh/golang-monorepo/cmd/samplecmd .
+COPY --from=0 /go/src/github.com/flowerinthenight/golang-monorepo/cmd/samplecmd .
 ENTRYPOINT ["/samplecmd/samplecmd"]
 CMD ["--logtostderr"]

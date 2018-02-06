@@ -1,15 +1,15 @@
 FROM golang:1.9.3
 ARG version
-COPY pkg/ /go/src/github.com/flowerinthenigh/golang-monorepo/pkg/
-COPY vendor/ /go/src/github.com/flowerinthenigh/golang-monorepo/vendor/
-COPY services/samplesvc/ /go/src/github.com/flowerinthenigh/golang-monorepo/services/samplesvc/
-COPY kubeconf-dev.yaml /go/src/github.com/flowerinthenigh/golang-monorepo/services/samplesvc/
-WORKDIR /go/src/github.com/flowerinthenigh/golang-monorepo/services/samplesvc/
-RUN CGO_ENABLED=0 GOOS=linux go build -v -ldflags "-X github.com/flowerinthenigh/golang-monorepo/services/samplesvc/main.version=$version" -a -installsuffix cgo -o samplesvc .
+COPY pkg/ /go/src/github.com/flowerinthenight/golang-monorepo/pkg/
+COPY vendor/ /go/src/github.com/flowerinthenight/golang-monorepo/vendor/
+COPY services/samplesvc/ /go/src/github.com/flowerinthenight/golang-monorepo/services/samplesvc/
+COPY kubeconf-dev.yaml /go/src/github.com/flowerinthenight/golang-monorepo/services/samplesvc/
+WORKDIR /go/src/github.com/flowerinthenight/golang-monorepo/services/samplesvc/
+RUN CGO_ENABLED=0 GOOS=linux go build -v -ldflags "-X github.com/flowerinthenight/golang-monorepo/services/samplesvc/main.version=$version" -a -installsuffix cgo -o samplesvc .
 
 FROM alpine:3.7
 RUN apk --no-cache add ca-certificates
 WORKDIR /samplesvc/
-COPY --from=0 /go/src/github.com/flowerinthenigh/golang-monorepo/services/samplesvc .
+COPY --from=0 /go/src/github.com/flowerinthenight/golang-monorepo/services/samplesvc .
 ENTRYPOINT ["/samplesvc/samplesvc"]
 CMD ["run", "--logtostderr"]
