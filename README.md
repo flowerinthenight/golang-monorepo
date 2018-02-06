@@ -14,4 +14,6 @@ For now, only [CircleCI](./.circleci/config.yml) is supported. But since it uses
 
 ## How does it work
 
-During CircleCI builds, the [script](./.circleci/config.yml) iterates the updated files within the commit range (`CIRCLE_COMPARE_URL` environment variable in CircleCI) or the changed files within a single commit (when the range value is not a valid range).
+During CircleCI builds, the [script](./.circleci/config.yml) iterates the updated files within the commit range (`CIRCLE_COMPARE_URL` environment variable in CircleCI) or the changed files within a single commit (when the value is not a valid range), excluding hidden files, `pkg` and `vendor` folders. It will then try to walk up the directory path until it can find a Makefile (excluding root Makefile). Once found, the root Makefile will include that Makefile and call the `custom` rule as target, thus, initiating the build.
+
+When the changes belong to either `pkg` or `vendor`, the script will then try to determine the services (and cmds) that have dependencies using the `go list` command. All dependent services will then be built using the same process described above.
