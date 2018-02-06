@@ -3,7 +3,6 @@ ARG version
 COPY pkg/ /go/src/github.com/flowerinthenight/golang-monorepo/pkg/
 COPY vendor/ /go/src/github.com/flowerinthenight/golang-monorepo/vendor/
 COPY services/samplesvc/ /go/src/github.com/flowerinthenight/golang-monorepo/services/samplesvc/
-COPY kubeconf-dev.yaml /go/src/github.com/flowerinthenight/golang-monorepo/services/samplesvc/
 WORKDIR /go/src/github.com/flowerinthenight/golang-monorepo/services/samplesvc/
 RUN CGO_ENABLED=0 GOOS=linux go build -v -ldflags "-X github.com/flowerinthenight/golang-monorepo/services/samplesvc/main.version=$version" -a -installsuffix cgo -o samplesvc .
 

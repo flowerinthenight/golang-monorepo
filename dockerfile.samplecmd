@@ -3,7 +3,6 @@ ARG version
 COPY pkg/ /go/src/github.com/flowerinthenight/golang-monorepo/pkg/
 COPY vendor/ /go/src/github.com/flowerinthenight/golang-monorepo/vendor/
 COPY cmd/samplecmd/ /go/src/github.com/flowerinthenight/golang-monorepo/cmd/samplecmd/
-COPY kubeconf-dev.yaml /go/src/github.com/flowerinthenight/golang-monorepo/cmd/samplecmd/
 WORKDIR /go/src/github.com/flowerinthenight/golang-monorepo/cmd/samplecmd/
 RUN CGO_ENABLED=0 GOOS=linux go build -v -ldflags "-X github.com/flowerinthenight/golang-monorepo/cmd/samplecmd/main.version=$version" -a -installsuffix cgo -o samplecmd .
 
