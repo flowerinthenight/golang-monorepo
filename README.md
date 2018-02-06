@@ -10,4 +10,4 @@ This is an example of a golang-based monorepo. It has the following features:
 
 It uses [dep](https://github.com/golang/dep) as its dependency management tool.
 
-For now, only [CircleCI](./.circleci/config.yml) is supported.
+For now, only [CircleCI](./.circleci/config.yml) is supported. But since it uses bash scripts and Makefiles, it should be fairly straightforward to port to [TravisCI](https://travis-ci.org/) or [AppVeyor](https://www.appveyor.com/).
