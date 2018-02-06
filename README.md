@@ -17,3 +17,14 @@ For now, only [CircleCI](./.circleci/config.yml) is supported. But since it uses
 During CircleCI builds, the [script](./.circleci/config.yml) iterates the updated files within the commit range (`CIRCLE_COMPARE_URL` environment variable in CircleCI) or the changed files within a single commit (when the value is not a valid range), excluding hidden files, `pkg` and `vendor` folders. It will then try to walk up the directory path until it can find a Makefile (excluding root Makefile). Once found, the [root Makefile](./Makefile) will include that Makefile and call the `custom` rule as target, thus, initiating the build.
 
 When the changes belong to either `pkg` or `vendor`, the script will then try to determine the services (and cmds) that have dependencies using the `go list` command. All dependent services will then be built using the same process described above.
+
+## Directory structure
+
+Our directory structure consists of the following:
+
+- `services/` - Basically, long running services deployed to [mochi](https://github.com/mobingilabs/mochi).
+- `cmd/` - CLI-based tools that are not long running.
+- `pkg/` - Shared codes, or libraries common across the repo.
+- `vendor/` - Third party codes from different vendors.
+
+Although we have this structure, there is no limitation into where should we put our services/tools. Any subdirectory structure is fine as long as you have a makefile that can be called from the root makefile.
