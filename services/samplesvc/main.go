@@ -36,10 +36,6 @@ func RunCmd() *cobra.Command {
 			glog.Infof("Hello from samplesvc (version: %v)", version)
 			// sample use of pkg
 			glog.Error(util.Err2(fmt.Errorf("test error")))
-			/*
-				u1 := uuid.NewV4()
-				_ = u1
-			*/
 		},
 	}
 
