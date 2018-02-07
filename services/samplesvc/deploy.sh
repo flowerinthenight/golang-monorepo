@@ -11,7 +11,8 @@ echo "Running '$0' for '${NAME}'"
 # docker push 963826138034.dkr.ecr.ap-northeast-1.amazonaws.com/${NAME}:${CIRCLE_SHA1}
 
 ### If you need to deploy your service to kubernetes, you need to use the kubectl tool. The setup for kubectl's
-### config file is also included in this section.
+### config file is also included in this section, although you need to provide your own kubectl's config file
+### in the root directory. In this example, the filename is `kubeconf.yaml`.
 ###
 # curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl
 # chmod +x ./kubectl
