@@ -67,6 +67,19 @@ jobs:
               
               # Main build command.
               INCLUDE_MAKEFILE=$MKFILE make release
+
+              ### Slack notification per makefile build.
+              ### Useful if you use slack. It will notify build status/information for each makefile.
+              ### Modify accordingly.
+              ###
+              # SLACK_URL=`echo "https://hooks.slack.com/services/xxxx/yyyy/zzzzzzzzzzzzz"`
+              # if [ $? -eq 0 ]; then
+              #   PAYLOAD=`printf '{"text":"\`\`\`\nBuildInput: %s\nMakefile: %s\nBranch: %s\nCommitRange: %s\nStatus: SUCCESS\n\`\`\`"}' "$DIRNAME" "$MKFILE_FULL" "$CIRCLE_BRANCH" "$COMMIT_RANGE"`
+              #   curl -X POST -d "payload=${PAYLOAD}" $SLACK_URL
+              # else
+              #   PAYLOAD=`printf '{"text":"\`\`\`\nBuildInput: %s\nMakefile: %s\nBranch: %s\nCommitRange: %s\nStatus: FAILED\n\`\`\`"}' "$DIRNAME" "$MKFILE_FULL" "$CIRCLE_BRANCH" "$COMMIT_RANGE"`
+              #   curl -X POST -d "payload=${PAYLOAD}" $SLACK_URL
+              # fi
              
               # Add item to our list of built makefiles.
               BUILT=`echo "${BUILT};${MKFILE_FULL}"`
