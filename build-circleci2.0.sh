@@ -1,4 +1,4 @@
-        #!/bin/bash
+#!/bin/bash
 
 # Somehow, this is important even though we already have `setup_remote_docker`.
 VER="17.12.0-ce"
