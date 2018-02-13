@@ -60,14 +60,15 @@ build () {
     ### Useful if you use slack. It will notify build status/information for each makefile.
     ### Modify accordingly.
     ###
-    # SLACK_URL=`echo "https://hooks.slack.com/services/xxxx/yyyy/zzzzzzzzzzzzz"`
+    # STATUS=FAILED
+    # 
     # if [ $? -eq 0 ]; then
-    #   PAYLOAD=`printf '{"text":"\`\`\`\nBuildInput: %s\nMakefile: %s\nBranch: %s\nCommitRange: %s\nStatus: SUCCESS\n\`\`\`"}' "$DIRNAME" "$MKFILE_FULL" "$CIRCLE_BRANCH" "$COMMIT_RANGE"`
-    #   curl -X POST -d "payload=${PAYLOAD}" $SLACK_URL
-    # else
-    #   PAYLOAD=`printf '{"text":"\`\`\`\nBuildInput: %s\nMakefile: %s\nBranch: %s\nCommitRange: %s\nStatus: FAILED\n\`\`\`"}' "$DIRNAME" "$MKFILE_FULL" "$CIRCLE_BRANCH" "$COMMIT_RANGE"`
-    #   curl -X POST -d "payload=${PAYLOAD}" $SLACK_URL
+    #     STATUS=SUCCESS
     # fi
+    #
+    # SLACK_URL=`echo "https://hooks.slack.com/services/xxxx/yyyy/zzzzzzzzzzzzz"`
+    # PAYLOAD=`printf '{"text":"\`#%s\` %s\n\`\`\`\nBuildInput: %s\nMakefile: %s\nBranch: %s\nCommitRange: %s\nStatus: %s\n\`\`\`"}' "$CIRCLE_BUILD_NUM" "$CIRCLE_BUILD_URL" "$DIRNAME" "$MKFILE_FULL" "$CIRCLE_BRANCH" "$COMMIT_RANGE" "$STATUS"`
+    # curl -X POST -d "payload=${PAYLOAD}" $SLACK_URL
    
     # Add item to our list of built makefiles.
     BUILT=`echo "${BUILT};${MKFILE_FULL}"`
