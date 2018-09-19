@@ -8,8 +8,6 @@ This is an example of a golang-based monorepo. It has the following features:
 - Build all services and/or cmds that are affected by changes in common codes (i.e. `pkg`).
 - Build all services and/or cmds that are affected by changes in `vendor` codes.
 
-It uses [dep](https://github.com/golang/dep) as its dependency management tool.
-
 For now, only [CircleCI 2.0](./.circleci/config.yml) is supported. But since it uses bash scripts and Makefiles, it should be fairly straightforward to port to [TravisCI](https://travis-ci.org/) or [AppVeyor](https://www.appveyor.com/).
 
 ## How does it work
