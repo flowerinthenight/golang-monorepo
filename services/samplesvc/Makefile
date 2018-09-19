@@ -18,6 +18,7 @@ $(BASE):
 custom: docker deploy
 
 docker:
+	cp $(BASE)/services/samplesvc/dockerfile.samplesvc $(BASE)/
 	docker build -f dockerfile.samplesvc --rm -t $(MODULE):$(CIRCLE_SHA1) --build-arg version="$(BLDVER)" .
 
 deploy:
