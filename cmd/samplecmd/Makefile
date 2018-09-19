@@ -18,6 +18,7 @@ $(BASE):
 custom: docker deploy
 
 docker:
+	cp $(BASE)/cmd/samplecmd/dockerfile.samplecmd $(BASE)/
 	docker build -f dockerfile.samplecmd --rm -t $(MODULE):$(CIRCLE_SHA1) --build-arg version="$(BLDVER)" .
 
 deploy:
