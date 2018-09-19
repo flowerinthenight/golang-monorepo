@@ -12,5 +12,5 @@ jobs:
         name: build
         shell: /bin/bash
         command: |
-          chmod +x ./build-circleci2.0.sh
-          ./build-circleci2.0.sh
+          chmod +x ./build.sh
+          ./build.sh
