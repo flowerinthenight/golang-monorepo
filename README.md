@@ -10,6 +10,8 @@ This is an example of a golang-based monorepo. It has the following features:
 
 For now, only [CircleCI 2.0](./.circleci/config.yml) is supported. But since it uses bash scripts and Makefiles, it should be fairly straightforward to port to [TravisCI](https://travis-ci.org/) or [AppVeyor](https://www.appveyor.com/).
 
+At the moment, CI is setup to use Go1.11 with `GO111MODULE=on` environment variable enabled during build.
+
 ## How does it work
 
 During CircleCI builds, the [script](./build.sh) iterates the updated files within the commit range (`CIRCLE_COMPARE_URL` environment variable in CircleCI) or the changed files within a single commit (when the value is not a valid range), excluding hidden files, `pkg`, and `vendor` folders. It will then try to walk up the directory path until it can find a Makefile (excluding root Makefile). Once found, the [root Makefile](./Makefile) will include that Makefile and call the `custom` rule as target, thus, initiating the build.
