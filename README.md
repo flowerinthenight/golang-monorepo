@@ -37,4 +37,4 @@ A reference template named [samplesvc](./services/samplesvc) is provided. Basica
 - [Optional] Update the [deploy.sh](./services/samplesvc/deploy.sh) script for your deployment needs.
 
 ## Misc
-- https://tech.mobingi.com/2018/09/25/ouchan-monorepo.html
+https://tech.mobingi.com/2018/09/25/ouchan-monorepo.html
