@@ -3,11 +3,11 @@ jobs:
   build:
     working_directory: /go/src/github.com/flowerinthenight/golang-monorepo/
     docker:
-    - image: golang:1.13.8
+    - image: golang:1.14
     steps:
     - checkout
     - setup_remote_docker:
-        version: 17.11.0-ce
+        version: 18.06.0-ce
     - run:
         name: build
         shell: /bin/bash
