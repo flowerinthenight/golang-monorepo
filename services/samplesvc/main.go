@@ -1,8 +1,13 @@
 package main
 
 import (
+	"context"
 	goflag "flag"
 	"fmt"
+	"os"
+	"os/signal"
+	"syscall"
+	"time"
 
 	"github.com/flowerinthenight/golang-monorepo/pkg/util"
 	"github.com/golang/glog"
@@ -15,7 +20,8 @@ var version = "?"
 var (
 	rootCmd = &cobra.Command{
 		Use:   "samplesvc",
-		Short: "A samplesvc for reference in ouchan monorepo.",
+		Short: "samplesvc for reference",
+		Long:  "A samplesvc for reference in golang-monorepo.",
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
 			goflag.Parse()
 		},
@@ -27,23 +33,52 @@ func init() {
 	flag.CommandLine.AddGoFlagSet(goflag.CommandLine)
 }
 
+func run(quit context.Context, done chan error) {
+	// sample use of pkg
+	glog.Error(util.Err2(fmt.Errorf("test error")))
+
+	for {
+		select {
+		case <-quit.Done():
+			done <- nil
+			return
+		}
+	}
+}
+
 func RunCmd() *cobra.Command {
-	runCmd := &cobra.Command{
+	cmd := &cobra.Command{
 		Use:   "run",
-		Short: "Sample subcommand.",
-		Long:  "Sample subcommand.",
-		Run: func(cmd *cobra.Command, args []string) {
-			glog.Infof("Hello from samplesvc (version: %v)", version)
-			// sample use of pkg
-			glog.Error(util.Err2(fmt.Errorf("test error")))
+		Short: "run samplesvc",
+		Long:  "Run samplesvc as a long-running service.",
+		RunE: func(cmd *cobra.Command, args []string) error {
+			defer func(begin time.Time) {
+				glog.Infof("stop samplesvc after %v", time.Since(begin))
+			}(time.Now())
+
+			glog.Infof("start samplesvc on %v", time.Now())
+
+			quit, cancel := context.WithCancel(context.TODO())
+			done := make(chan error)
+			go run(quit, done)
+
+			go func() {
+				sigch := make(chan os.Signal)
+				signal.Notify(sigch, syscall.SIGINT, syscall.SIGTERM)
+				glog.Info(<-sigch)
+				cancel()
+			}()
+
+			return <-done
 		},
 	}
 
-	return runCmd
+	return cmd
+
 }
 
 func main() {
 	if err := rootCmd.Execute(); err != nil {
-		glog.Fatalf("root cmd execute failed: %v", err)
+		glog.Fatalf("%v", err)
 	}
 }
