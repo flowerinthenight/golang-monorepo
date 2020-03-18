@@ -10,7 +10,7 @@ This is an example of a golang-based monorepo. It has the following features:
 
 For now, only [CircleCI 2.0](./.circleci/config.yml) is supported. But since it uses bash scripts and Makefiles, it should be fairly straightforward to port to [TravisCI](https://travis-ci.org/) or [AppVeyor](https://www.appveyor.com/), etc.
 
-At the moment, CI is setup to use Go1.13[.x] with `GO111MODULE=on` and `GOFLAGS=-mod=vendor` environment variables enabled during build. See sample [dockerfile](./services/samplesvc/dockerfile.samplesvc) for more details.
+At the moment, CI is setup to use Go1.14[.x] with `GO111MODULE=on` and `GOFLAGS=-mod=vendor` environment variables enabled during build. See sample [dockerfile](./services/samplesvc/dockerfile.samplesvc) for more details.
 
 ## How does it work
 
