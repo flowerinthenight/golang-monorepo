@@ -4,8 +4,8 @@
 
 This is an example of a golang-based monorepo. It has the following features:
 
-- Only build the services or cmds that are updated.
-- Build all services and/or cmds that are affected by changes in common codes (i.e. `pkg`).
+- Only build the services or cmds that are modified in a commit;
+- Build all services and/or cmds that are affected by changes in common codes (i.e. `pkg`);
 - Build all services and/or cmds that are affected by changes in `vendor` codes.
 
 For now, only [CircleCI 2.0](./.circleci/config.yml) is supported. But since it uses bash scripts and Makefiles, it should be fairly straightforward to port to [TravisCI](https://travis-ci.org/) or [AppVeyor](https://www.appveyor.com/), etc.
