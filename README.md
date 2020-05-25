@@ -36,5 +36,9 @@ A reference template named [samplesvc](./services/samplesvc) is provided. Basica
 - Update the [Makefile](./services/samplesvc/Makefile) with your own values. You need to at least update the `MODULE` variable with your service name. The only required rule is the `custom` part so you may need to change that as well (i.e. name of the dockerfile used in `docker build`).
 - [Optional] Update the [deploy.sh](./services/samplesvc/deploy.sh) script for your deployment needs.
 
+## Need help
+PR's are welcome!
+- [ ] Make it work without the `vendor` folder as well
+
 ## Misc
 https://tech.mobingi.com/2018/09/25/ouchan-monorepo.html
