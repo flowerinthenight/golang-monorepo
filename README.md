@@ -38,6 +38,7 @@ A reference template named [samplesvc](./services/samplesvc) is provided. Basica
 
 ## Need help
 PR's are welcome!
+- [ ] Support for other CI, i.e. GitHub Workflow
 - [ ] Make it work without the `vendor` folder as well
 
 ## Misc
