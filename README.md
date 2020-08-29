@@ -1,4 +1,6 @@
-[![CircleCI](https://circleci.com/gh/flowerinthenight/golang-monorepo.svg?style=svg)](https://circleci.com/gh/flowerinthenight/golang-monorepo)
+|GitHub Actions|CircleCI|
+|:-----|:------|
+|![Main](https://github.com/flowerinthenight/golang-monorepo/workflows/Main/badge.svg)|[![CircleCI](https://circleci.com/gh/flowerinthenight/golang-monorepo.svg?style=svg)](https://circleci.com/gh/flowerinthenight/golang-monorepo)|
 
 ## Overview
 
