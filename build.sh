@@ -117,7 +117,6 @@ echo "Commit range ${COMMIT_RANGE}"
 echo "$COMMIT_RANGE" | grep -i -E '\w\.\.+\w|\w\ \w'
 
 if [ $? -ne 0 ]; then
-  # Unfortunately we don't always get a commit range from circleci.
   # Walk through each changed file within the commit.
   echo "No commit range? (${COMMIT_RANGE})"
   git diff-tree --no-commit-id --name-only -r $COMMIT_RANGE | while read line; do
@@ -126,7 +125,7 @@ if [ $? -ne 0 ]; then
   done
 else
   # Walk through each changed file within the commit range.
-  echo "Proper commit range = ${COMMIT_RANGE}"
+  echo "Proper commit range ${COMMIT_RANGE}"
   git diff --name-only $COMMIT_RANGE | while read line; do
     processline $line
     echo "-"
