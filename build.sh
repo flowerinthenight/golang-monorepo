@@ -10,12 +10,12 @@ if [ $rc -ne 0 ]; then
   docker --version
 fi
 
-### Install awscli. Used for pushing container images to ECR.
-### You may want to set these environment variables:
-### 
-###     AWS_ACCESS_KEY_ID
-###     AWS_SECRET_ACCESS_KEY
-###
+# Install awscli. Used for pushing container images to ECR.
+# You may want to set these environment variables:
+#
+#   AWS_ACCESS_KEY_ID
+#   AWS_SECRET_ACCESS_KEY
+#
 # apt update && apt install -y python-pip python-dev
 # pip install --user awscli
 # export PATH=${PATH}:${HOME}/.local/bin
@@ -47,24 +47,24 @@ build () {
       MKFILE=`echo "${DIRNAME}/Makefile"`
     fi
   done
-  
+
   # Get the full path of the makefile.
   MKFILE_FULL=`readlink -e ${MKFILE}`
-  
+
   # Build only if it's not on our list of built makefiles.
   BUILT=$(<builtlist)
   if [[ $BUILT != *"${MKFILE_FULL}"* ]]; then
     echo "Build ${DIRNAME} (${MKFILE_FULL})"
-    
+
     # Main build command.
     INCLUDE_MAKEFILE=$MKFILE make release
 
-    ### Slack notification per makefile build.
-    ### Useful if you use slack. It will notify build status/information for each makefile.
-    ### Modify accordingly.
-    ###
+    # Slack notification per makefile build.
+    # Useful if you use slack. It will notify build status/information for each makefile.
+    # Modify accordingly.
+    #
     # STATUS=FAILED
-    # 
+    #
     # if [ $? -eq 0 ]; then
     #     STATUS=SUCCESS
     # fi
@@ -72,7 +72,7 @@ build () {
     # SLACK_URL=`echo "https://hooks.slack.com/services/xxxx/yyyy/zzzzzzzzzzzzz"`
     # PAYLOAD=`printf '{"text":"\`#%s\` %s\n\`\`\`\nBuildInput: %s\nMakefile: %s\nBranch: %s\nCommitRange: %s\nStatus: %s\n\`\`\`"}' "$CIRCLE_BUILD_NUM" "$CIRCLE_BUILD_URL" "$DIRNAME" "$MKFILE_FULL" "$CIRCLE_BRANCH" "$COMMIT_RANGE" "$STATUS"`
     # curl -X POST -d "payload=${PAYLOAD}" $SLACK_URL
-   
+
     # Add item to our list of built makefiles.
     BUILT=`echo "${BUILT};${MKFILE_FULL}"`
     echo "${BUILT}" > builtlist
@@ -92,7 +92,7 @@ processline () {
     find . -type d -not -path "*/\.*" | grep -v 'vendor' | grep -v 'pkg' | while read item; do
       # Get the current package's full list of golang dependencies (recursive).
       PKG_GODEPS=`go list -f '{{ .Deps }}' $item`
-      
+
       if [ $? -eq 0 ]; then
         LINE_DIR=`dirname $line`
 
