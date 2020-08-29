@@ -53,6 +53,7 @@ A reference template named [samplesvc](./services/samplesvc) is provided. Basica
 PR's are welcome!
 - [x] Support for GitHub Actions
 - [ ] Support for GitLab
+- [ ] Run `go test ...` for `pkg/` when Makefile is root
 - [ ] Make it work without the `vendor` folder as well
 
 ## Misc
