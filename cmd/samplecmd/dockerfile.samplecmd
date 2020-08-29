@@ -7,7 +7,7 @@ COPY cmd/samplecmd/ /go/src/github.com/flowerinthenight/golang-monorepo/cmd/samp
 WORKDIR /go/src/github.com/flowerinthenight/golang-monorepo/cmd/samplecmd/
 RUN GO111MODULE=on GOFLAGS=-mod=vendor CGO_ENABLED=0 GOOS=linux go build -v -ldflags "-X github.com/flowerinthenight/golang-monorepo/cmd/samplecmd/main.version=$version" -a -installsuffix cgo -o samplecmd .
 
-FROM alpine:3.11
+FROM alpine:3.12
 RUN apk --no-cache add ca-certificates
 WORKDIR /samplecmd/
 COPY --from=0 /go/src/github.com/flowerinthenight/golang-monorepo/cmd/samplecmd .
