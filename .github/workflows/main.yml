@@ -1,0 +1,30 @@
+name: Main
+
+on:
+  push:
+    branches:
+    - master
+
+jobs:
+  deploy:
+    name: Build
+    if: "!contains(github.event.commits[0].message, 'ci skip')"
+    runs-on: ubuntu-20.04
+    steps:
+    - name: Setup golang v1.x
+      uses: actions/setup-go@v2
+      with:
+        go-version: ^1.13
+
+    - name: Checkout code
+      uses: actions/checkout@v2
+      with:
+        fetch-depth: 0
+
+    - name: Build monorepo
+      env:
+        COMMIT_RANGE: "${{github.event.before}}..${{github.sha}}"
+      shell: bash
+      run: |
+        chmod +x ./build.sh
+        ./build.sh
