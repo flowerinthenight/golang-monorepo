@@ -21,7 +21,7 @@ fi
 # export PATH=${PATH}:${HOME}/.local/bin
 # aws --version
 
-# Set commit range if not set yet.
+# Set commit range $COMMIT_RANGE variable if not set yet.
 [ -z "$COMMIT_RANGE" ] && COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
 
 # This is the list of all makefiles that we've already built. We don't include the
@@ -112,6 +112,8 @@ processline () {
 }
 
 echo "Commit range ${COMMIT_RANGE}"
+
+# Is it a valid commit range? (should be 'a b', 'a..b', 'a...b')
 echo "$COMMIT_RANGE" | grep -i -E '\w\.\.+\w|\w\ \w'
 
 if [ $? -ne 0 ]; then
