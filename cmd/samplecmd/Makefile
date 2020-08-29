@@ -14,7 +14,7 @@ $(BASE):
 
 .PHONY: custom docker deploy
 
-## The required rule that is called by our root Makefile during CI builds.
+# The required rule that is called by our root Makefile during CI builds.
 custom: docker deploy
 
 docker:
