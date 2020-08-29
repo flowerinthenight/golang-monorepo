@@ -16,9 +16,11 @@ At the moment, CI is setup to use Go 1.14[.x] with `GO111MODULE=on` and `GOFLAGS
 
 ## How does it work
 
-During CircleCI builds, [build.sh](./build.sh) iterates the updated files within the commit range (`CIRCLE_COMPARE_URL` environment variable in CircleCI) or the modified files within a single commit (when the value is not a valid range), excluding hidden files, `pkg`, and `vendor` folders. It will then try to walk up the directory path until it can find a Makefile (excluding root Makefile). Once found, the [root Makefile](./Makefile) will include that Makefile and call the `custom` rule as target, thus, initiating the build.
+During CI builds, [build.sh](./build.sh) iterates the updated files within the commit range (`CIRCLE_COMPARE_URL` environment variable in CircleCI) or the modified files within a single commit (when the value is not a valid range), excluding hidden files, `pkg`, and `vendor` folders. It will then try to walk up the directory path until it can find a Makefile (excluding root Makefile). Once found, the [root Makefile](./Makefile) will include that Makefile and call the `custom` rule as target, thus, initiating the build.
 
 When the changes belong to either `pkg` or `vendor`, the script will then try to determine the services (and cmds) that have dependencies using the `go list` command. All dependent services will then be built using the same process described above.
+
+You can override the `COMMIT_RANGE` environment variable for your own CI. If this is set, `build.sh` will use its value. You also want to set `CIRCLE_SHA1` to your commit SHA (`CIRCLE_SHA1` is CircleCI-specific).
 
 ## Directory structure
 
