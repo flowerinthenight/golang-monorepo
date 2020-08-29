@@ -1,7 +1,7 @@
 #!/bin/bash
 
-docker --version; rc=$?
-if [ $rc -ne 0 ]; then
+docker --version
+if [ $? -ne 0 ]; then
   # Somehow, this is important even though we already have `setup_remote_docker`.
   VER="18.06.1-ce"
   curl -L -o /tmp/docker-$VER.tgz https://download.docker.com/linux/static/stable/x86_64/docker-$VER.tgz
@@ -21,7 +21,8 @@ fi
 # export PATH=${PATH}:${HOME}/.local/bin
 # aws --version
 
-# Set commit range $COMMIT_RANGE variable if not set yet.
+# Set commit range $COMMIT_RANGE variable if not set yet. ${CIRCLE_COMPARE_URL} is a remnant of
+# the previous support for CircleCI 2.0.
 [ -z "$COMMIT_RANGE" ] && COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
 
 # This is the list of all makefiles that we've already built. We don't include the
@@ -82,8 +83,7 @@ build () {
 
 # Prebuild function. Takes a file as input.
 processline () {
-  line=$1
-  echo "Process ${line}"
+  line=$1; echo "Process ${line}"
 
   if [[ $line == vendor* ]] || [[ $line == pkg* ]]; then
     # The changed line is common. We will iterate through all dirs except hidden ones, 'vendor',
