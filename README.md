@@ -20,7 +20,16 @@ During CI builds, [build.sh](./build.sh) iterates the updated files within the c
 
 When the changes belong to either `pkg` or `vendor`, the script will then try to determine the services (and cmds) that have dependencies using the `go list` command. All dependent services will then be built using the same process described above.
 
-You can override the `COMMIT_RANGE` environment variable for your own CI. If this is set, `build.sh` will use its value. You also want to set `CIRCLE_SHA1` to your commit SHA (`CIRCLE_SHA1` is CircleCI-specific). Example for GitHub Actions is [here](https://github.com/flowerinthenight/golang-monorepo/blob/master/.github/workflows/main.yml).
+You can override the `COMMIT_RANGE` environment variable for your own CI. If this is set, `build.sh` will use its value. You also want to set `CIRCLE_SHA1` to your commit SHA (`CIRCLE_SHA1` is CircleCI-specific). Example for GitHub Actions is [here](https://github.com/flowerinthenight/golang-monorepo/blob/master/.github/workflows/main.yml). Something like:
+```bash
+# If your commit range is correct:
+COMMIT_RANGE: aaaaa..bbbbb
+CIRCLE_SHA1: aaaaa
+
+# If no valid commit range:
+COMMIT_RANGE: <your_commit_sha>
+CIRCLE_SHA1: <your_commit_sha>
+```
 
 ## Directory structure
 
