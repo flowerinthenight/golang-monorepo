@@ -21,8 +21,8 @@ fi
 # export PATH=${PATH}:${HOME}/.local/bin
 # aws --version
 
-# Set commit range $COMMIT_RANGE variable if not set yet. ${CIRCLE_COMPARE_URL} is a remnant of
-# the previous support for CircleCI 2.0.
+# Set commit range $COMMIT_RANGE variable if not set yet. ${CIRCLE_COMPARE_URL} is a
+# remnant of the previous support for CircleCI 2.0.
 [ -z "$COMMIT_RANGE" ] && COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
 
 # This is the list of all makefiles that we've already built. We don't include the
