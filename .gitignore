@@ -1,0 +1,6 @@
+/.idea
+# File generated while running on local
+builtlist
+/dockerfile*
+# Gitlab Local Run
+builds
