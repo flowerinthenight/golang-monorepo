@@ -38,7 +38,8 @@ A reference template named [samplesvc](./services/samplesvc) is provided. Basica
 
 ## Need help
 PR's are welcome!
-- [ ] Support for other CI, i.e. GitHub Actions
+- [x] Support for GitHub Actions
+- [ ] Support for GitLab
 - [ ] Make it work without the `vendor` folder as well
 
 ## Misc
