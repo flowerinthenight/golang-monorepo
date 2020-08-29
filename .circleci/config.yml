@@ -1,4 +1,4 @@
-version: 2
+version: 2.1
 jobs:
   build:
     working_directory: /go/src/github.com/flowerinthenight/golang-monorepo/
@@ -11,6 +11,8 @@ jobs:
     - run:
         name: build
         shell: /bin/bash
+        environment: 
+          COMMIT_RANGE: <<pipeline.git.base_revision>>..<<pipeline.git.revision>>
         command: |
           chmod +x ./build.sh
           ./build.sh
