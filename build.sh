@@ -21,7 +21,7 @@ fi
 # export PATH=${PATH}:${HOME}/.local/bin
 # aws --version
 
-# Extract commit range (or single commit).
+# Set commit range if not set yet.
 [ -z "$COMMIT_RANGE" ] && COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
 
 # This is the list of all makefiles that we've already built. We don't include the
@@ -112,8 +112,9 @@ processline () {
 }
 
 echo "Commit range ${COMMIT_RANGE}"
+echo "$COMMIT_RANGE" | grep -i -E '\w\.\.+\w|\w\ \w'
 
-if [[ $COMMIT_RANGE != *"..."* ]]; then
+if [ $? -ne 0 ]; then
   # Unfortunately we don't always get a commit range from circleci.
   # Walk through each changed file within the commit.
   echo "No commit range? (${COMMIT_RANGE})"
