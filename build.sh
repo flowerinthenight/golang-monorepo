@@ -22,10 +22,9 @@ fi
 # aws --version
 
 # Extract commit range (or single commit).
-echo "Compare url '${CIRCLE_COMPARE_URL}'"
-COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
+[ -z "$COMMIT_RANGE" ] && COMMIT_RANGE=$(echo "${CIRCLE_COMPARE_URL}" | cut -d/ -f7)
 
-# This is the list of all makefiles that we've already built. We don't include the 
+# This is the list of all makefiles that we've already built. We don't include the
 # root makefile by default.
 BUILT=`readlink -e ${PWD}/Makefile`
 echo "${BUILT}" > builtlist
