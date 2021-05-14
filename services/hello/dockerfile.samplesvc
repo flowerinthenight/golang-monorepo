@@ -1,0 +1,15 @@
+FROM golang:1.16.3
+ARG version
+COPY go.* /go/src/github.com/chibimi/golang-monorepo/
+COPY pkg/ /go/src/github.com/chibimi/golang-monorepo/pkg/
+COPY vendor/ /go/src/github.com/chibimi/golang-monorepo/vendor/
+COPY services/hello/ /go/src/github.com/chibimi/golang-monorepo/services/hello/
+WORKDIR /go/src/github.com/chibimi/golang-monorepo/services/hello/
+RUN GO111MODULE=on GOFLAGS=-mod=vendor CGO_ENABLED=0 GOOS=linux go build -v -ldflags "-X github.com/chibimi/golang-monorepo/services/hello/main.version=$version" -a -installsuffix cgo -o hello .
+
+FROM alpine:3.13
+RUN apk --no-cache add ca-certificates
+WORKDIR /hello/
+COPY --from=0 /go/src/github.com/chibimi/golang-monorepo/services/hello .
+ENTRYPOINT ["/hello/hello"]
+CMD ["run", "--logtostderr"]

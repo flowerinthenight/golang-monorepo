@@ -19,9 +19,9 @@ var version = "?"
 
 var (
 	rootCmd = &cobra.Command{
-		Use:   "samplesvc",
-		Short: "samplesvc for reference",
-		Long:  "A samplesvc for reference in golang-monorepo.",
+		Use:   "hello",
+		Short: "hello for reference",
+		Long:  "A hello for reference in golang-monorepo.",
 		PersistentPreRun: func(cmd *cobra.Command, args []string) {
 			goflag.Parse()
 		},
@@ -49,14 +49,14 @@ func run(quit context.Context, done chan error) {
 func RunCmd() *cobra.Command {
 	cmd := &cobra.Command{
 		Use:   "run",
-		Short: "run samplesvc",
-		Long:  "Run samplesvc as a long-running service.",
+		Short: "run hello",
+		Long:  "Run hello as a long-running service.",
 		RunE: func(cmd *cobra.Command, args []string) error {
 			defer func(begin time.Time) {
-				glog.Infof("stop samplesvc after %v", time.Since(begin))
+				glog.Infof("stop hello after %v", time.Since(begin))
 			}(time.Now())
 
-			glog.Infof("start samplesvc on %v", time.Now())
+			glog.Infof("start hello on %v", time.Now())
 
 			quit, cancel := context.WithCancel(context.TODO())
 			done := make(chan error)

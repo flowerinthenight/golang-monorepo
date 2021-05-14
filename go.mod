@@ -1,4 +1,4 @@
-module github.com/flowerinthenight/golang-monorepo
+module github.com/chibimi/golang-monorepo
 
 go 1.14
 
