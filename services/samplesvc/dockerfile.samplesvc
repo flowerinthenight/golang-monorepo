@@ -1,4 +1,4 @@
-FROM golang:1.16.5
+FROM golang:1.16.6
 ARG version
 COPY go.* /go/src/github.com/flowerinthenight/golang-monorepo/
 COPY pkg/ /go/src/github.com/flowerinthenight/golang-monorepo/pkg/
@@ -7,7 +7,7 @@ COPY services/samplesvc/ /go/src/github.com/flowerinthenight/golang-monorepo/ser
 WORKDIR /go/src/github.com/flowerinthenight/golang-monorepo/services/samplesvc/
 RUN GO111MODULE=on GOFLAGS=-mod=vendor CGO_ENABLED=0 GOOS=linux go build -v -ldflags "-X github.com/flowerinthenight/golang-monorepo/services/samplesvc/main.version=$version" -a -installsuffix cgo -o samplesvc .
 
-FROM alpine:3.13
+FROM alpine:3.14
 RUN apk --no-cache add ca-certificates
 WORKDIR /samplesvc/
 COPY --from=0 /go/src/github.com/flowerinthenight/golang-monorepo/services/samplesvc .
