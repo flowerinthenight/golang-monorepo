@@ -3,4 +3,4 @@
 -include $(INCLUDE_MAKEFILE)
 
 .PHONY: release
-release: custom 
+release: custom
