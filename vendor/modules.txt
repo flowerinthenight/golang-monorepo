@@ -1,14 +1,21 @@
-# github.com/golang/glog v1.0.0
+# github.com/golang/glog v1.1.0
 ## explicit
 github.com/golang/glog
-# github.com/inconshreveable/mousetrap v1.0.0
+github.com/golang/glog/internal/logsink
+github.com/golang/glog/internal/stackdump
+# github.com/inconshreveable/mousetrap v1.1.0
+## explicit
 github.com/inconshreveable/mousetrap
 # github.com/pkg/errors v0.9.1
 ## explicit
 github.com/pkg/errors
-# github.com/spf13/cobra v1.2.1
+# github.com/shurcooL/sanitized_anchor_name v1.0.0
+## explicit
+# github.com/spf13/cobra v1.6.1
 ## explicit
 github.com/spf13/cobra
 # github.com/spf13/pflag v1.0.5
 ## explicit
 github.com/spf13/pflag
+# github.com/spf13/viper v1.8.1
+## explicit
