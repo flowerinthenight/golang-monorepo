@@ -11,7 +11,7 @@ jobs:
     - run:
         name: Build monorepo
         shell: /bin/bash
-        environment: 
+        environment:
           COMMIT_RANGE: <<pipeline.git.base_revision>>..<<pipeline.git.revision>>
         command: |
           chmod +x ./build.sh
