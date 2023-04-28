@@ -55,6 +55,3 @@ PR's are welcome!
 - [ ] Support for GitLab
 - [ ] Run `go test ...` for `pkg/` when Makefile is root
 - [ ] Make it work without the `vendor` folder as well
-
-## Misc
-https://tech.mobingi.com/2018/09/25/ouchan-monorepo.html
