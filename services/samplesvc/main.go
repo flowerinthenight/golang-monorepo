@@ -78,7 +78,5 @@ func RunCmd() *cobra.Command {
 }
 
 func main() {
-	if err := rootCmd.Execute(); err != nil {
-		glog.Fatalf("%v", err)
-	}
+	rootCmd.Execute()
 }
