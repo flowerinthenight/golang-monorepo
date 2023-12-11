@@ -1,6 +1,6 @@
 module github.com/flowerinthenight/golang-monorepo
 
-go 1.14
+go 1.18
 
 require (
 	github.com/golang/glog v1.2.0
