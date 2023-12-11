@@ -6,7 +6,7 @@ jobs:
     - image: cimg/go:1.21.5
     steps:
     - checkout
-    - setup_remote_docker:
+    - setup_remote_docker
         # version: 18.06.0-ce
     - run:
         name: Build monorepo
