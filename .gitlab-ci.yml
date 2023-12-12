@@ -1,0 +1,14 @@
+variables:
+  DOCKER_TLS_CERTDIR: ""
+
+stages:
+  - build
+
+docker-build:
+  image: docker:19.03.1
+  services:
+    - docker:19.03.1-dind
+  stage: build
+  script:
+    - apk update && apk add -y --no-cache bash git # This line can be packaged inside some custom image
+    - chmod +x build.sh && ./build.sh

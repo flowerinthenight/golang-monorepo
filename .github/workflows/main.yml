@@ -26,6 +26,8 @@ jobs:
         COMMIT_RANGE: "${{github.event.before}}..${{github.sha}}"
         # Compatibility for CircleCI 2.0
         CIRCLE_SHA1: ${{github.sha}}
+        CI_COMMIT_BEFORE_SHA: "${{github.event.before}}"
+        CI_COMMIT_SHA: "${{github.sha}}"
       shell: bash
       run: |
         chmod +x ./build.sh
