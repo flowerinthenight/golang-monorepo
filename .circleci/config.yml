@@ -1,7 +1,6 @@
 version: 2.1
 jobs:
   build:
-    # working_directory: /go/src/github.com/flowerinthenight/golang-monorepo/
     working_directory: ~/repo/
     docker:
     - image: cimg/go:1.21.5
