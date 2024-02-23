@@ -69,6 +69,8 @@ func RunCmd() *cobra.Command {
 				cancel()
 			}()
 
+			// test commit
+
 			return <-done
 		},
 	}
