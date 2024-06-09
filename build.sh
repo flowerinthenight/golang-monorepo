@@ -27,7 +27,7 @@ fi
 
 # This is the list of all makefiles that we've already built. We don't include the
 # root makefile by default.
-BUILT=`readlink -e ${PWD}/Makefile`
+BUILT=`realpath ${PWD}/Makefile`
 echo "${BUILT}" > builtlist
 
 # Main build function. Takes a directory as input.
@@ -49,7 +49,7 @@ build () {
   done
 
   # Get the full path of the makefile.
-  MKFILE_FULL=`readlink -e ${MKFILE}`
+  MKFILE_FULL=`realpath ${MKFILE}`
 
   # Build only if it's not on our list of built makefiles.
   BUILT=$(<builtlist)
@@ -114,7 +114,32 @@ processline () {
 echo "Commit range ${COMMIT_RANGE}"
 
 # Is it a valid commit range? (should be 'a b', 'a..b', 'a...b')
-echo "$COMMIT_RANGE" | grep -i -E '\w\.\.+\w|\w\ \w'
+#       => I prefer 'a b' which work with both tree and commit.
+#       => .. Will be expand by shell => I dont like this
+# Extract commit range (or single commit).
+COMMIT_RANGE_SEP="..."
+if [[ "x$CI_COMMIT_BEFORE_SHA" == "x" || "$CI_COMMIT_BEFORE_SHA" == "0000000000000000000000000000000000000000" ]]; then
+  # CI_COMMIT_BEFORE_SHA is not defined
+  # Newly create branch will have "0000000000000000000000000000000000000000" as before commit id.
+  GIT_COMMIT_NUMBER=`git log --oneline | wc -l | bc`
+  if [[ $GIT_COMMIT_NUMBER == "1" ]]; then
+    # 4b825dc642cb6eb9a060e54bf8d69288fbee4904 is magic id which always existed. Note: this is an empty tree
+    #     => Separator must be whitespace
+    # docs: https://git.wiki.kernel.org/index.php/Aliases
+    # command: printf '' | git hash-object -t tree --stdin
+    CI_COMMIT_BEFORE_SHA="4b825dc642cb6eb9a060e54bf8d69288fbee4904"
+    COMMIT_RANGE_SEP=" "
+  else
+    # Default value when run on local
+    CI_COMMIT_BEFORE_SHA=$(git rev-parse HEAD~1)
+  fi
+fi
+if [[ "x$CI_COMMIT_SHA" == "x" ]]; then
+  # CI_COMMIT_SHA is not defined
+  CI_COMMIT_SHA=$(git rev-parse HEAD)
+fi
+
+COMMIT_RANGE="${CI_COMMIT_BEFORE_SHA}${COMMIT_RANGE_SEP}${CI_COMMIT_SHA}"
 
 if [ $? -ne 0 ]; then
   # Walk through each changed file within the commit.
