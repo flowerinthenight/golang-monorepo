@@ -2,6 +2,8 @@
 |:-----|:------|
 |[![main](https://github.com/flowerinthenight/golang-monorepo/actions/workflows/main.yml/badge.svg)](https://github.com/flowerinthenight/golang-monorepo/actions/workflows/main.yml)|[![CircleCI](https://circleci.com/gh/flowerinthenight/golang-monorepo.svg?style=svg)](https://circleci.com/gh/flowerinthenight/golang-monorepo)|
 
+(This repo is mirrored to [https://codeberg.org/flowerinthenight/golang-monorepo](https://codeberg.org/flowerinthenight/golang-monorepo)).
+
 ## Overview
 
 This is an example of a golang-based monorepo. It has the following features:
