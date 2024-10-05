@@ -4,8 +4,26 @@ on:
   push:
     branches:
     - master
+    tags:
+    - '*'
 
 jobs:
+  codeberg:
+    name: Codeberg
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Mirror to Codeberg
+        uses: yesolutions/mirror-action@master
+        with:
+          REMOTE: "https://codeberg.org/flowerinthenight/golang-monorepo.git"
+          GIT_USERNAME: flowerinthenight
+          GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
+
   deploy:
     name: Build
     if: "!contains(github.event.commits[0].message, 'ci skip')"
