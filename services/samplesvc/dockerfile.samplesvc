@@ -1,4 +1,4 @@
-FROM golang:1.22.3
+FROM golang:1.25.1-trixie
 ARG version
 COPY go.* /go/src/github.com/flowerinthenight/golang-monorepo/
 COPY pkg/ /go/src/github.com/flowerinthenight/golang-monorepo/pkg/
