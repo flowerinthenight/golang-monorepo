@@ -1,7 +1,7 @@
 FROM golang:1.25.1-trixie
 ARG version
 COPY go.* /go/src/github.com/flowerinthenight/golang-monorepo/
-COPY pkg/ /go/src/github.com/flowerinthenight/golang-monorepo/pkg/
+COPY internal/ /go/src/github.com/flowerinthenight/golang-monorepo/internal/
 COPY vendor/ /go/src/github.com/flowerinthenight/golang-monorepo/vendor/
 COPY services/samplesvc/ /go/src/github.com/flowerinthenight/golang-monorepo/services/samplesvc/
 WORKDIR /go/src/github.com/flowerinthenight/golang-monorepo/services/samplesvc/
