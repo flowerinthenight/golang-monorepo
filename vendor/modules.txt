@@ -6,9 +6,6 @@ github.com/golang/glog/internal/stackdump
 # github.com/inconshreveable/mousetrap v1.1.0
 ## explicit; go 1.18
 github.com/inconshreveable/mousetrap
-# github.com/pkg/errors v0.9.1
-## explicit
-github.com/pkg/errors
 # github.com/spf13/cobra v1.10.1
 ## explicit; go 1.15
 github.com/spf13/cobra

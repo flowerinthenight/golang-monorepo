@@ -3,13 +3,12 @@ package main
 import (
 	"context"
 	goflag "flag"
-	"fmt"
 	"os"
 	"os/signal"
 	"syscall"
 	"time"
 
-	"github.com/flowerinthenight/golang-monorepo/pkg/util"
+	"github.com/flowerinthenight/golang-monorepo/internal"
 	"github.com/golang/glog"
 	"github.com/spf13/cobra"
 	flag "github.com/spf13/pflag"
@@ -34,16 +33,11 @@ func init() {
 }
 
 func run(quit context.Context, done chan error) {
-	// sample use of pkg
-	glog.Error(util.Err2(fmt.Errorf("test error")))
+	// Sample use of internal package.
+	glog.Error(internal.GetHostname())
 
-	for {
-		select {
-		case <-quit.Done():
-			done <- nil
-			return
-		}
-	}
+	<-quit.Done()
+	done <- nil
 }
 
 func RunCmd() *cobra.Command {
@@ -63,7 +57,7 @@ func RunCmd() *cobra.Command {
 			go run(quit, done)
 
 			go func() {
-				sigch := make(chan os.Signal)
+				sigch := make(chan os.Signal, 1)
 				signal.Notify(sigch, syscall.SIGINT, syscall.SIGTERM)
 				glog.Info(<-sigch)
 				cancel()
@@ -74,7 +68,6 @@ func RunCmd() *cobra.Command {
 	}
 
 	return cmd
-
 }
 
 func main() {
