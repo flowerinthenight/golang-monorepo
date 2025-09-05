@@ -12,34 +12,28 @@ jobs:
     name: Codeberg
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+    - uses: actions/checkout@v4
 
-      - name: Mirror to Codeberg
-        uses: yesolutions/mirror-action@master
-        with:
-          REMOTE: "https://codeberg.org/flowerinthenight/golang-monorepo.git"
-          GIT_USERNAME: flowerinthenight
-          GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
+    - name: Mirror to Codeberg
+      uses: yesolutions/mirror-action@master
+      with:
+        REMOTE: "https://codeberg.org/flowerinthenight/golang-monorepo.git"
+        GIT_USERNAME: flowerinthenight
+        GIT_PASSWORD: ${{ secrets.GIT_PASSWORD }}
 
   deploy:
     name: Build
     if: "!contains(github.event.commits[0].message, 'ci skip')"
     runs-on: ubuntu-latest
     steps:
-    - name: Setup golang v1.x
-      uses: actions/setup-go@v2
+    - name: 'Setup golang v1.x'
+      uses: actions/setup-go@v4
       with:
-        go-version: ^1.13
+        go-version: '1.25'
 
-    - name: Checkout code
-      uses: actions/checkout@v2
-      with:
-        fetch-depth: 0
+    - uses: actions/checkout@v4
 
-    - name: Build monorepo
+    - name: 'Build monorepo'
       env:
         COMMIT_RANGE: "${{github.event.before}}..${{github.sha}}"
         # Compatibility for CircleCI 2.0
