@@ -14,7 +14,7 @@ This is an example of a golang-based monorepo. It has the following features:
 
 For now, [CircleCI 2.1](./.circleci/config.yml) and [GitHub Actions](https://github.com/flowerinthenight/golang-monorepo/actions) are supported. But since it uses bash scripts and Makefiles, it should be fairly straightforward to port to [TravisCI](https://travis-ci.org/) or [AppVeyor](https://www.appveyor.com/), etc.
 
-At the moment, CI is setup with `GO111MODULE=on` and `GOFLAGS=-mod=vendor` environment variables enabled during build. See sample [`dockerfile`](./services/samplesvc/dockerfile.samplesvc) for more details.
+At the moment, CI is setup with `GO111MODULE=on` and `GOFLAGS=-mod=vendor` environment variables enabled during build. See sample [`dockerfile.samplesvc`](./services/samplesvc/dockerfile.samplesvc) for more details.
 
 ## How does it work
 
@@ -49,6 +49,6 @@ CIRCLE_SHA1: <your_commit_sha>
 A reference template named [`samplesvc`](./services/samplesvc) is provided. Basically, these are the things that you need to do:
 
 - Create a new directory for your service under `services/` or tool under `cmd/`. You may copy the [`samplesvc`](./services/samplesvc) contents to your new directory.
-- Update the `dockerfile.*` inside your new service directory. Note that during build, this `dockerfile.*` is [copied](https://github.com/flowerinthenight/golang-monorepo/blob/master/services/samplesvc/Makefile#L21) to the root directory (to be able to access `internal` and `vendor` directories).
-- Update the [`Makefile`](./services/samplesvc/Makefile) with your own values. You need to at least update the `MODULE` variable with your service name. The only required rule is the `custom` part so you may need to change that as well (i.e. name of the `dockerfile.*` used in `docker build`).
+- Update the `dockerfile.{name}` inside your new service directory. Note that during build, this `dockerfile.{name}` is [copied](https://github.com/flowerinthenight/golang-monorepo/blob/master/services/samplesvc/Makefile#L21) to the root directory (to be able to access `internal` and `vendor` directories).
+- Update the [`Makefile`](./services/samplesvc/Makefile) with your own values. You need to at least update the `MODULE` variable with your service name. The only required rule is the `custom` part so you may need to change that as well (i.e. name of the `dockerfile.{name}` used in `docker build`).
 - [Optional] Update the [`deploy.sh`](./services/samplesvc/deploy.sh) script for your deployment needs.
