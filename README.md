@@ -42,7 +42,7 @@ CIRCLE_SHA1: <your_commit_sha>
 - `vendor/` - Third party codes from different vendors.
 
 > [!IMPORTANT]
-> Although we have this structure, there is no limitation into where should you put your services/cmds. Any subdirectory structure is fine as long as a `Makefile` is provided.
+> Although we have this structure, there is no limitation into where to put your services/cmds. Any subdirectory structure is fine as long as a `Makefile` is provided.
 
 ## How to add a service/cmd
 
