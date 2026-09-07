@@ -3,7 +3,7 @@ jobs:
   build:
     working_directory: ~/repo/
     docker:
-    - image: cimg/go:1.21.5
+    - image: cimg/go:1.27.1
     steps:
     - checkout
     - setup_remote_docker
